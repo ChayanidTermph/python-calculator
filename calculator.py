@@ -3,23 +3,45 @@ class Calculator:
         return a + b
 
     def subtract(self, a, b):
-        return b - a
+        return a - b
 
     def multiply(self, a, b):
         result = 0
-        for i in range(b+1):
+        for i in range(b):
             result = self.add(result, a)
         return result
 
     def divide(self, a, b):
         result = 0
-        while a > b:
-            a = self.subtract(a, b)
-            result += 1
-        return result
+        if a == 0 or b == 0:
+            return result
+        elif (a < 0 and b < 0):
+            a = -a
+            b = -b
+            while a >= b:
+                a = self.subtract(a, b)
+                result += 1
+            return result
+        elif (a > 0 and b > 0):
+            while a >= b:
+                a = self.subtract(a, b)
+                result += 1
+            return result
+        elif (a < 0 and b > 0):
+            a = -a
+            while a >= b:
+                a = self.subtract(a, b)
+                result += 1
+            return -result
+        else:
+            b = -b
+            while a >= b:
+                a = self.subtract(a, b)
+                result += 1
+            return -result
     
     def modulo(self, a, b):
-        while a <= b:
+        while a >= b:
             a = a-b
         return a
 
